@@ -9,5 +9,12 @@ class AdminController extends AdminBaseController
     public function test(){
 //        $adminModel = AdminModel::find();
 //        var_dump($adminModel->adminName);
+        echo $this->request->admin;
     }
+
+    public function login(){
+
+    }
+
+
 }

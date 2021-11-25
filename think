@@ -13,8 +13,14 @@
 namespace think;
 
 // 加载基础文件
+use app\index\utility\Cache\UserCache;
+
 require __DIR__ . '/thinkphp/base.php';
 
 // 执行应用
 Container::get('app', [__DIR__ . '/application/'])->initialize();
+
+//\think\facade\Cache::set('userCache',new UserCache());
+//\think\facade\Cache::set('userCache')->userTable = '111';
+\think\facade\Cache::clear();
 Console::init();

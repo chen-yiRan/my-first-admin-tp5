@@ -32,5 +32,9 @@ class UserController extends UserBaseController
         }
     }
 
+    public function test(){
+        echo "test";
+    }
+
 
 }
