@@ -25,7 +25,7 @@ class UserController extends UserBaseController
         $userModel = UserModel::where('username',$username)->find();
         if(md5($password) === $userModel->password){
             $session = UserCache::makeSession($userModel);
-
+            cookie('user_token',$session);
             return "success";
         }else{
             return "false";
@@ -33,6 +33,7 @@ class UserController extends UserBaseController
     }
 
     public function test(){
+        echo cookie('user_token');
         echo "test";
     }
 

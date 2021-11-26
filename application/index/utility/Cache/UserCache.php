@@ -28,9 +28,11 @@ class UserCache
 
     public static function makeSession(UserModel $user)
     {
-        cookie($user->userId,$user);
+
         $time = time();
         $token = substr(md5($time . $user->password), 8, 16);
+        unset($user->password);
+        cache($user->userId,$user);
         return "{$user->userId}-{$token}-{$time}";
     }
 
@@ -46,7 +48,7 @@ class UserCache
                 return null;
             }
 //            $user = $this->get($userId);
-            $user = cookie('userId');
+            $user = cache($userId);
             if ($user) {
                 if (($ttl !== null) && (time() - $loginTime > $ttl)) {
                     return null;

@@ -31,13 +31,16 @@ class Auth
         if ($this->who) {
             return $this->who;
         }
+
 //        $token = $this->request()->getCookieParams(static::USER_TOKEN_NAME);
         $token = cookie('user_token');
+        var_dump($token);
         if (empty($token)) {
 //            $token = $this->request()->getRequestParam(static::USER_TOKEN_NAME);
             $token = Request::param('user_token');
         }
         $this->who = UserCache::getInstance()->getBySession($token);
+        var_dump($this->who);
         return $this->who;
     }
 
