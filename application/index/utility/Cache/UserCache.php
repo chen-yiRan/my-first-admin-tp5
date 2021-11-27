@@ -30,9 +30,10 @@ class UserCache
     {
 
         $time = time();
+        var_dump($user->password);
         $token = substr(md5($time . $user->password), 8, 16);
-        unset($user->password);
-        cache($user->userId,$user);
+        var_dump($user->userId);
+        cache('userId' . $user->userId,$user);
         return "{$user->userId}-{$token}-{$time}";
     }
 
@@ -48,11 +49,15 @@ class UserCache
                 return null;
             }
 //            $user = $this->get($userId);
-            $user = cache($userId);
+//            var_dump($userId);
+            $user = cache('userId' . $userId);
+//            var_dump($user);
             if ($user) {
                 if (($ttl !== null) && (time() - $loginTime > $ttl)) {
+                    echo "null";
                     return null;
                 }
+
                 if ($token === substr(md5($loginTime . $user->password), 8, 16)) {
                     return $user;
                 }
