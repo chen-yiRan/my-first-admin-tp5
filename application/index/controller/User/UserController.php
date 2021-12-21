@@ -11,6 +11,13 @@ class UserController extends UserBaseController
 
     public function register($username,$password){
         $userModel = new UserModel();
+        if(UserModel::find($username)){
+            return json([
+               'code' => '3',
+               'result' => null,
+               'msg' => '该用户名已经存在'
+            ]);
+        }
         $userModel->username = $username;
         $userModel->password = md5($password);
         $userModel->save();
@@ -36,6 +43,8 @@ class UserController extends UserBaseController
         echo cookie('user_token');
         echo "test";
     }
+
+
 
 
 }

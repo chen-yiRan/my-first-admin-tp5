@@ -17,4 +17,8 @@ class AdminModel extends \think\Model
 {
     protected $tableName = 'tp5_admin';
 
+//    // 定义时间戳字段名
+//    protected $createTime = 'lastLoginTime';
+//    protected $autoWriteTimestamp = true;
+
 }
